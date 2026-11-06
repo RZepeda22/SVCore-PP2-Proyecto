@@ -1,0 +1,352 @@
+/* DTE Emitido Page Styles */
+.dte-emitido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 32px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-left h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.header-left p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.btn-new-sale {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.2s;
+}
+
+.btn-new-sale:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.dte-emitido-content {
+    padding: 24px 32px;
+    overflow-y: auto;
+    flex: 1;
+    background-color: var(--bg-light);
+}
+
+/* Success Banner */
+.success-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.success-icon {
+    width: 56px;
+    height: 56px;
+    background-color: var(--success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.success-icon svg {
+    color: var(--white);
+}
+
+.success-text {
+    flex: 1;
+}
+
+.success-text h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #166534;
+    margin-bottom: 4px;
+}
+
+.success-text p {
+    font-size: 14px;
+    color: #166534;
+    opacity: 0.8;
+}
+
+.success-seal {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.seal-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #166534;
+    margin-bottom: 4px;
+}
+
+.seal-date {
+    font-size: 13px;
+    color: #166534;
+}
+
+/* DTE Emitido Grid */
+.dte-emitido-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 24px;
+}
+
+/* Document Card */
+.document-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.document-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.document-type-badge {
+    padding: 6px 12px;
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.signed-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--success);
+}
+
+/* Document Sections */
+.document-section {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.document-section:last-child {
+    border-bottom: none;
+}
+
+.document-section h3 {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.info-value.production {
+    color: var(--success);
+}
+
+.info-value.code {
+    font-family: monospace;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+/* Detail Table */
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detail-table th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background-color: var(--bg-light);
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-table td {
+    padding: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-table tr:last-child td {
+    border-bottom: none;
+}
+
+.item-code {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Document Totals */
+.document-totals {
+    padding: 20px 24px;
+    background-color: var(--bg-light);
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.total-row.final {
+    padding-top: 12px;
+    margin-top: 8px;
+    border-top: 1px solid var(--border);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Right Sidebar */
+.dte-emitido-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* QR Card */
+.qr-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+}
+
+.qr-placeholder {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.qr-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Actions Card */
+.actions-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.actions-card h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-bottom: 8px;
+}
+
+.action-btn:last-child {
+    margin-bottom: 0;
+}
+
+.action-btn.primary {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+}
+
+.action-btn.primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.action-btn.secondary {
+    background-color: var(--white);
+    color: var(--text-dark);
+    border: 1px solid var(--border);
+}
+
+.action-btn.secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.action-btn.success {
+    background-color: var(--success);
+    color: var(--white);
+    border: none;
+}
+
+.action-btn.success:hover {
+    background-color: #16a34a;
+}

@@ -1,0 +1,233 @@
+/* ============================================================
+   SV-Core · estilos de las pantallas migradas a React y de las
+   pantallas nuevas (usuarios, bitácora, reportes, anulación,
+   nota de crédito, clientes y configuración).
+   Reutiliza las variables y clases de styles.css / app.css.
+   ============================================================ */
+
+/* ---------- Avisos en línea ---------- */
+.sv-notice {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-light);
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.sv-notice strong {
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+.sv-notice.success {
+    background: var(--success-bg);
+    border-color: #bbf7d0;
+}
+
+.sv-notice.success strong {
+    color: #15803d;
+}
+
+.sv-notice.danger {
+    background: var(--danger-bg);
+    border-color: #fecaca;
+}
+
+.sv-notice.danger strong {
+    color: var(--danger);
+}
+
+.sv-notice.warning {
+    background: var(--warning-bg);
+    border-color: #fde68a;
+}
+
+.sv-notice.warning strong {
+    color: #b45309;
+}
+
+/* ---------- Barras de filtros ---------- */
+.sv-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.sv-filter-bar .form-group {
+    margin-bottom: 0;
+    min-width: 140px;
+}
+
+.sv-filter-bar.inline {
+    padding: 0;
+    border-bottom: none;
+}
+
+.sv-filter-bar.inline .form-group {
+    min-width: 130px;
+}
+
+.sv-filter-bar .form-group label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: var(--text-muted);
+}
+
+.sv-filter-bar .form-input {
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+/* ---------- Tablas y celdas ---------- */
+.sv-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sv-role-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.sv-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sv-help {
+    display: block;
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.sv-selected-row td {
+    background-color: var(--bg-light);
+}
+
+.sv-qty-input {
+    width: 80px;
+    padding: 6px 8px;
+}
+
+/* ---------- Checkboxes de roles y opciones ---------- */
+.sv-check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sv-check-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+/* ---------- Paginación ---------- */
+.sv-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* ---------- Reportes ---------- */
+.sv-report-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.sv-report-block {
+    margin-top: 16px;
+}
+
+.sv-report-grid .sv-report-block {
+    margin-top: 0;
+}
+
+.sv-report-grid .sv-report-block + .sv-report-block {
+    margin-top: 16px;
+}
+
+/* ---------- Nota de crédito ---------- */
+.sv-nc-fields {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ---------- Configuración ---------- */
+.sv-config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 20px;
+    padding: 20px;
+}
+
+.sv-config-grid .form-group {
+    margin-bottom: 0;
+}
+
+.sv-simulator {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.sv-modal.sv-modal-wide {
+    max-width: 720px;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1100px) {
+    .sv-report-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .sv-config-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sv-pagination {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ---------- Impresión: incluir las pantallas nuevas ---------- */
+@media print {
+    .sv-notice,
+    .sv-filter-bar,
+    .sv-pagination {
+        display: none !important;
+    }
+}

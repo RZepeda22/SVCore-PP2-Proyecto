@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV-Core - DTE en Contingencia</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dte-emitido.css">
+    <link rel="stylesheet" href="css/dte-contingencia.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body data-page="contingencia">
+    <div class="pos-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">SV</div>
+                <div class="brand-text">
+                    <h2>SV-Core</h2>
+                    <span>Adventure Works</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Operación</div>
+                    <a href="dashboard.html" class="nav-item active" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/shopping-cart.png" alt="Punto de venta"></span>
+                        Punto de venta
+                    </a>
+                    <a href="dte.html" class="nav-item" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/logistics.png" alt="Facturación"></span>
+                        Facturación (DTE)
+                    </a>
+                    <a href="inventario.html" class="nav-item">
+                        <span class="icon"><img src="assets/online-shop.png" alt="Inventario"></span>
+                        Inventario
+                        <span class="nav-badge"></span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/user.png" alt="Clientes"></span>
+                        Clientes
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Gestión</div>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/report.png" alt="Reportes"></span>
+                        Reportes
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/setting.png" alt="Configuración"></span>
+                        Configuración
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar"></div>
+                <div class="user-info">
+                    <div class="user-name"></div>
+                    <div class="user-role"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="pos-main">
+            <!-- Header -->
+            <header class="dte-emitido-header">
+                <div class="header-left">
+                    <h1>Resultado de la venta</h1>
+                    <p>Punto de venta · Emisión de DTE</p>
+                </div>
+                <a href="pos.html" class="btn-new-sale">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Nueva venta
+                </a>
+            </header>
+
+            <div class="dte-emitido-content">
+                <!-- Warning Banner -->
+                <div class="warning-banner">
+                    <div class="warning-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="warning-text">
+                        <h2>Venta registrada · DTE en cola de contingencia</h2>
+                        <p>El servicio del Ministerio de Hacienda no está disponible. El documento se transmitirá automáticamente cuando el servicio se restablezca. No se requiere ninguna acción.</p>
+                    </div>
+                    <div class="warning-seal">
+                        <span class="seal-label">GUARDADO EN CONTINGENCIA</span>
+                        <span class="seal-date" id="savedAt"></span>
+                    </div>
+                </div>
+
+                <div class="dte-emitido-grid">
+                    <!-- Document Info -->
+                    <div class="document-card">
+                        <div class="document-header">
+                            <span class="document-type-badge" id="docTypeBadge"></span>
+                            <span class="pending-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                Pendiente de sello
+                            </span>
+                        </div>
+
+                        <!-- Transmission Status -->
+                        <div class="transmission-status">
+                            <div class="transmission-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg>
+                            </div>
+                            <div class="transmission-text">
+                                <strong>ESTADO DE LA TRANSMISIÓN</strong>
+                                <p>La venta y el documento ya están guardados de forma segura. El sistema reintentará el envío en segundo plano, sin interrumpir la atención en caja. Podrás descargar o reenviar el comprobante una vez que Hacienda devuelva el sello.</p>
+                            </div>
+                        </div>
+
+                        <!-- Identification -->
+                        <div class="document-section">
+                            <h3>IDENTIFICACIÓN DEL DOCUMENTO</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">TIPO</span>
+                                    <span class="info-value" id="docType"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">CÓDIGO DE GENERACIÓN</span>
+                                    <span class="info-value code" id="generationCode"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">NÚMERO DE CONTROL</span>
+                                    <span class="info-value" id="controlNumber"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">ESTADO</span>
+                                    <span class="info-value warning" id="statusLabel"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">EN COLA DESDE</span>
+                                    <span class="info-value" id="queuedSince"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">SELLO DE RECEPCIÓN</span>
+                                    <span class="info-value pending" id="receptionStamp"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resumen -->
+                        <div class="document-section">
+                            <h3>RESUMEN</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">RECEPTOR</span>
+                                    <span class="info-value" id="rcName"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">FORMA DE PAGO</span>
+                                    <span class="info-value" id="payment"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">TOTAL</span>
+                                    <span class="info-value" id="total"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar -->
+                    <div class="dte-emitido-sidebar">
+                        <!-- Progress -->
+                        <div class="progress-card">
+                            <h3>PROGRESO DE LA EMISIÓN</h3>
+                            <div class="progress-timeline">
+                                <div class="progress-step completed">
+                                    <div class="step-dot"></div>
+                                    <div class="step-info">
+                                        <span class="step-name">Venta registrada</span>
+                                        <span class="step-time" id="stepSale"></span>
+                                    </div>
+                                </div>
+                                <div class="progress-step completed">
+                                    <div class="step-dot"></div>
+                                    <div class="step-info">
+                                        <span class="step-name">Documento generado y firmado</span>
+                                        <span class="step-time" id="stepSigned"></span>
+                                    </div>
+                                </div>
+                                <div class="progress-step active">
+                                    <div class="step-dot"></div>
+                                    <div class="step-info">
+                                        <span class="step-name">En cola de contingencia</span>
+                                        <span class="step-time" id="stepQueue"></span>
+                                    </div>
+                                </div>
+                                <div class="progress-step pending" id="stepStampRow">
+                                    <div class="step-dot"></div>
+                                    <div class="step-info">
+                                        <span class="step-name">Sello de Hacienda</span>
+                                        <span class="step-time" id="stepStamp"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="actions-card">
+                            <h3>ACCIONES</h3>
+                            <button class="action-btn primary" id="btnRetryNow">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+                                </svg>
+                                Reintentar ahora
+                            </button>
+                            <a href="pos.html" class="action-btn success">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                Iniciar nueva venta
+                            </a>
+                            <a href="dte.html?status=CONTINGENCIA" class="action-btn secondary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                                Ver cola de contingencia
+                            </a>
+                            <p class="action-note">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                Descarga y envío disponibles tras el sellado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dte-result.js"></script>
+</body>
+</html>

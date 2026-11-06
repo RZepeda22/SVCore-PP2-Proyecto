@@ -1,0 +1,243 @@
+/* DTE Contingencia Page Styles */
+.warning-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background-color: #fef3cd;
+    border: 1px solid #ffc107;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.warning-icon {
+    width: 56px;
+    height: 56px;
+    background-color: #ffc107;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.warning-icon svg {
+    color: var(--white);
+}
+
+.warning-text {
+    flex: 1;
+}
+
+.warning-text h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #856404;
+    margin-bottom: 4px;
+}
+
+.warning-text p {
+    font-size: 14px;
+    color: #856404;
+    opacity: 0.8;
+}
+
+.warning-seal {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.warning-seal .seal-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #856404;
+    margin-bottom: 4px;
+}
+
+.warning-seal .seal-date {
+    font-size: 13px;
+    color: #856404;
+}
+
+/* Pending Badge */
+.pending-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background-color: #fef3cd;
+    color: #856404;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Transmission Status */
+.transmission-status {
+    display: flex;
+    gap: 12px;
+    padding: 16px 24px;
+    background-color: #fff7cd;
+    border-bottom: 1px solid var(--border);
+}
+
+.transmission-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #ffc107;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.transmission-icon svg {
+    color: var(--white);
+}
+
+.transmission-text {
+    flex: 1;
+}
+
+.transmission-text strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #856404;
+    margin-bottom: 4px;
+}
+
+.transmission-text p {
+    font-size: 13px;
+    color: #856404;
+    line-height: 1.5;
+}
+
+/* Info Value States */
+.info-value.warning {
+    color: #d97706;
+    font-weight: 600;
+}
+
+.info-value.pending {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Progress Card */
+.progress-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.progress-card h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.progress-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.progress-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.progress-step:last-child {
+    padding-bottom: 0;
+}
+
+.progress-step::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 20px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--border);
+}
+
+.progress-step:last-child::before {
+    display: none;
+}
+
+.progress-step.completed::before {
+    background-color: var(--success);
+}
+
+.progress-step.active::before {
+    background: linear-gradient(to bottom, var(--success) 50%, var(--border) 50%);
+}
+
+.step-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 2px solid var(--border);
+    background-color: var(--white);
+}
+
+.progress-step.completed .step-dot {
+    background-color: var(--success);
+    border-color: var(--success);
+}
+
+.progress-step.active .step-dot {
+    background-color: var(--warning);
+    border-color: var(--warning);
+}
+
+.step-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+}
+
+.step-name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.progress-step.pending .step-name {
+    color: var(--text-muted);
+}
+
+.step-time {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    margin-left: 8px;
+}
+
+/* Action Note */
+.action-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    text-align: center;
+    justify-content: center;
+}

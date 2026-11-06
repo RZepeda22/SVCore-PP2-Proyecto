@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV-Core - DTE Rechazado</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dte-emitido.css">
+    <link rel="stylesheet" href="css/dte-rechazado.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body data-page="rechazado">
+    <div class="pos-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">SV</div>
+                <div class="brand-text">
+                    <h2>SV-Core</h2>
+                    <span>Adventure Works</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Operación</div>
+                    <a href="dashboard.html" class="nav-item active" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/shopping-cart.png" alt="Punto de venta"></span>
+                        Punto de venta
+                    </a>
+                    <a href="dte.html" class="nav-item" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/logistics.png" alt="Facturación"></span>
+                        Facturación (DTE)
+                    </a>
+                    <a href="inventario.html" class="nav-item">
+                        <span class="icon"><img src="assets/online-shop.png" alt="Inventario"></span>
+                        Inventario
+                        <span class="nav-badge"></span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/user.png" alt="Clientes"></span>
+                        Clientes
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Gestión</div>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/report.png" alt="Reportes"></span>
+                        Reportes
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/setting.png" alt="Configuración"></span>
+                        Configuración
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar"></div>
+                <div class="user-info">
+                    <div class="user-name"></div>
+                    <div class="user-role"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="pos-main">
+            <!-- Header -->
+            <header class="dte-emitido-header">
+                <div class="header-left">
+                    <h1>Resultado de la venta</h1>
+                    <p>Punto de venta · Emisión de DTE</p>
+                </div>
+                <a href="pos.html" class="btn-new-sale">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Nueva venta
+                </a>
+            </header>
+
+            <div class="dte-emitido-content">
+                <!-- Error Banner -->
+                <div class="error-banner">
+                    <div class="error-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </div>
+                    <div class="error-text">
+                        <h2>El documento fue rechazado por Hacienda</h2>
+                        <p>La venta quedó registrada, pero el DTE no se selló. Corrige los datos indicados y reintenta la transmisión.</p>
+                    </div>
+                    <div class="error-seal">
+                        <span class="seal-label">INTENTO</span>
+                        <span class="seal-date" id="attemptDate"></span>
+                    </div>
+                </div>
+
+                <div class="dte-emitido-grid">
+                    <!-- Document Info -->
+                    <div class="document-card">
+                        <div class="document-header">
+                            <span class="document-type-badge" id="docTypeBadge"></span>
+                            <span class="rejected-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                                No sellado
+                            </span>
+                        </div>
+
+                        <!-- Rejection Reason -->
+                        <div class="rejection-reason">
+                            <div class="rejection-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg>
+                            </div>
+                            <div class="rejection-text">
+                                <strong>MOTIVO DEVUELTO POR EL MINISTERIO DE HACIENDA</strong>
+                                <span class="rejection-code" id="rejectionCode"></span>
+                                <p id="rejectionMessage"></p>
+                            </div>
+                        </div>
+
+                        <!-- Identification -->
+                        <div class="document-section">
+                            <h3>IDENTIFICACIÓN DEL DOCUMENTO</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">TIPO</span>
+                                    <span class="info-value" id="docType"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">CÓDIGO DE GENERACIÓN</span>
+                                    <span class="info-value code" id="generationCode"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">ESTADO</span>
+                                    <span class="info-value danger" id="statusLabel"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Receptor Info -->
+                        <div class="document-section">
+                            <h3>RECEPTOR (A CORREGIR)</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">NOMBRE / RAZÓN SOCIAL</span>
+                                    <span class="info-value" id="rcName"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">NRC REPORTADO</span>
+                                    <span class="info-value danger" id="rcNrc"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar -->
+                    <div class="dte-emitido-sidebar">
+                        <!-- Actions -->
+                        <div class="actions-card">
+                            <h3>¿QUÉ DESEAS HACER?</h3>
+                            <button class="action-btn primary" id="btnFixRetry">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+                                </svg>
+                                Corregir datos y reintentar
+                            </button>
+                            <button class="action-btn secondary" id="btnEditCustomer">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                </svg>
+                                Editar datos del cliente
+                            </button>
+                            <button class="action-btn disabled">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Descargar PDF
+                            </button>
+                            <p class="action-note">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                No se puede descargar ni enviar un documento rechazado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dte-result.js"></script>
+</body>
+</html>
