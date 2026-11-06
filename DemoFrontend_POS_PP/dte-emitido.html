@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV-Core - DTE Emitido</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dte-emitido.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body data-page="emitido">
+    <div class="pos-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">SV</div>
+                <div class="brand-text">
+                    <h2>SV-Core</h2>
+                    <span>Adventure Works</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Operación</div>
+                    <a href="dashboard.html" class="nav-item active" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/shopping-cart.png" alt="Punto de venta"></span>
+                        Punto de venta
+                    </a>
+                    <a href="dte.html" class="nav-item" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/logistics.png" alt="Facturación"></span>
+                        Facturación (DTE)
+                    </a>
+                    <a href="inventario.html" class="nav-item">
+                        <span class="icon"><img src="assets/online-shop.png" alt="Inventario"></span>
+                        Inventario
+                        <span class="nav-badge"></span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/user.png" alt="Clientes"></span>
+                        Clientes
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Gestión</div>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/report.png" alt="Reportes"></span>
+                        Reportes
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/setting.png" alt="Configuración"></span>
+                        Configuración
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar"></div>
+                <div class="user-info">
+                    <div class="user-name"></div>
+                    <div class="user-role"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="pos-main">
+            <!-- Header -->
+            <header class="dte-emitido-header">
+                <div class="header-left">
+                    <h1>Resultado de la venta</h1>
+                    <p>Punto de venta · Emisión de DTE</p>
+                </div>
+                <a href="pos.html" class="btn-new-sale">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Nueva venta
+                </a>
+            </header>
+
+            <div class="dte-emitido-content">
+                <!-- Success Banner -->
+                <div class="success-banner">
+                    <div class="success-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <div class="success-text">
+                        <h2 id="bannerTitle">Documento emitido</h2>
+                        <p>El documento fue firmado, transmitido y sellado por el Ministerio de Hacienda.</p>
+                    </div>
+                    <div class="success-seal">
+                        <span class="seal-label">SELLO RECIBIDO</span>
+                        <span class="seal-date" id="sealDate"></span>
+                    </div>
+                </div>
+
+                <div class="dte-emitido-grid">
+                    <!-- Document Info -->
+                    <div class="document-card">
+                        <div class="document-header">
+                            <span class="document-type-badge" id="docTypeBadge"></span>
+                            <span class="signed-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                                Firmado electrónicamente
+                            </span>
+                        </div>
+
+                        <!-- Identification -->
+                        <div class="document-section">
+                            <h3>IDENTIFICACIÓN DEL DOCUMENTO</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">TIPO</span>
+                                    <span class="info-value" id="docType"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">NÚMERO DE CONTROL</span>
+                                    <span class="info-value" id="controlNumber"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">AMBIENTE</span>
+                                    <span class="info-value production" id="environment"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">CÓDIGO DE GENERACIÓN</span>
+                                    <span class="info-value code" id="generationCode"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">SELLO DE RECEPCIÓN</span>
+                                    <span class="info-value code" id="receptionStamp"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">FECHA Y HORA DE EMISIÓN</span>
+                                    <span class="info-value" id="issuedAt"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">FORMA DE PAGO</span>
+                                    <span class="info-value" id="payment"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Emisor -->
+                        <div class="document-section">
+                            <h3>EMISOR</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">RAZÓN SOCIAL</span>
+                                    <span class="info-value" id="emBusinessName"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">NOMBRE COMERCIAL</span>
+                                    <span class="info-value" id="emTradeName"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">NIT</span>
+                                    <span class="info-value" id="emNit"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">NRC</span>
+                                    <span class="info-value" id="emNrc"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">ACTIVIDAD ECONÓMICA</span>
+                                    <span class="info-value" id="emActivity"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">ESTABLECIMIENTO</span>
+                                    <span class="info-value" id="emEstablishment"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Receptor -->
+                        <div class="document-section">
+                            <h3>RECEPTOR</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">NOMBRE / RAZÓN SOCIAL</span>
+                                    <span class="info-value" id="rcName"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">TIPO DE CONTRIBUYENTE</span>
+                                    <span class="info-value" id="rcTaxpayerType"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">NRC</span>
+                                    <span class="info-value" id="rcNrc"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">NIT</span>
+                                    <span class="info-value" id="rcNit"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">DIRECCIÓN</span>
+                                    <span class="info-value" id="rcAddress"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">CORREO</span>
+                                    <span class="info-value" id="rcEmail"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Detalle -->
+                        <div class="document-section">
+                            <h3>DETALLE DE LA VENTA</h3>
+                            <table class="detail-table">
+                                <thead>
+                                    <tr>
+                                        <th>CANT.</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th>PRECIO UNIT.</th>
+                                        <th>VENTA NO SUJETA</th>
+                                        <th>VENTA EXENTA</th>
+                                        <th>VENTA GRAVADA</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="itemsBody"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- Totals -->
+                        <div class="document-totals">
+                            <div class="total-row">
+                                <span>Subtotal ventas no sujetas</span>
+                                <span id="totNonSubject"></span>
+                            </div>
+                            <div class="total-row">
+                                <span>Subtotal ventas exentas</span>
+                                <span id="totExempt"></span>
+                            </div>
+                            <div class="total-row">
+                                <span>Subtotal ventas gravadas</span>
+                                <span id="totTaxed"></span>
+                            </div>
+                            <div class="total-row">
+                                <span>Subtotal</span>
+                                <span id="totSubtotal"></span>
+                            </div>
+                            <div class="total-row">
+                                <span>Descuento</span>
+                                <span id="totDiscount"></span>
+                            </div>
+                            <div class="total-row">
+                                <span>IVA (13%)</span>
+                                <span id="totTax"></span>
+                            </div>
+                            <div class="total-row final">
+                                <span>TOTAL A PAGAR</span>
+                                <span id="totTotal"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar -->
+                    <div class="dte-emitido-sidebar">
+                        <!-- QR Code -->
+                        <div class="qr-card">
+                            <a class="qr-placeholder" id="qrLink" target="_blank" rel="noopener noreferrer" title="Verificar en el portal de Hacienda">
+                                <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                                    <rect width="120" height="120" fill="#1e3a5f"/>
+                                    <rect x="10" y="10" width="40" height="40" fill="white"/>
+                                    <rect x="70" y="10" width="40" height="40" fill="white"/>
+                                    <rect x="10" y="70" width="40" height="40" fill="white"/>
+                                    <rect x="15" y="15" width="30" height="30" fill="#1e3a5f"/>
+                                    <rect x="75" y="15" width="30" height="30" fill="#1e3a5f"/>
+                                    <rect x="15" y="75" width="30" height="30" fill="#1e3a5f"/>
+                                    <rect x="20" y="20" width="20" height="20" fill="white"/>
+                                    <rect x="80" y="20" width="20" height="20" fill="white"/>
+                                    <rect x="20" y="80" width="20" height="20" fill="white"/>
+                                    <rect x="55" y="10" width="5" height="5" fill="white"/>
+                                    <rect x="55" y="20" width="5" height="5" fill="white"/>
+                                    <rect x="55" y="55" width="5" height="5" fill="white"/>
+                                    <rect x="60" y="55" width="5" height="5" fill="white"/>
+                                    <rect x="65" y="55" width="5" height="5" fill="white"/>
+                                    <rect x="10" y="55" width="5" height="5" fill="white"/>
+                                    <rect x="20" y="55" width="5" height="5" fill="white"/>
+                                    <rect x="30" y="55" width="5" height="5" fill="white"/>
+                                    <rect x="40" y="55" width="5" height="5" fill="white"/>
+                                    <rect x="55" y="60" width="5" height="5" fill="white"/>
+                                    <rect x="70" y="60" width="5" height="5" fill="white"/>
+                                    <rect x="80" y="60" width="5" height="5" fill="white"/>
+                                    <rect x="90" y="60" width="5" height="5" fill="white"/>
+                                    <rect x="100" y="60" width="5" height="5" fill="white"/>
+                                    <rect x="55" y="70" width="5" height="5" fill="white"/>
+                                    <rect x="65" y="70" width="5" height="5" fill="white"/>
+                                    <rect x="75" y="70" width="5" height="5" fill="white"/>
+                                    <rect x="85" y="70" width="5" height="5" fill="white"/>
+                                    <rect x="95" y="70" width="5" height="5" fill="white"/>
+                                    <rect x="105" y="70" width="5" height="5" fill="white"/>
+                                    <rect x="55" y="80" width="5" height="5" fill="white"/>
+                                    <rect x="60" y="85" width="5" height="5" fill="white"/>
+                                    <rect x="70" y="80" width="5" height="5" fill="white"/>
+                                    <rect x="80" y="90" width="5" height="5" fill="white"/>
+                                    <rect x="90" y="80" width="5" height="5" fill="white"/>
+                                    <rect x="100" y="85" width="5" height="5" fill="white"/>
+                                    <rect x="55" y="95" width="5" height="5" fill="white"/>
+                                    <rect x="65" y="100" width="5" height="5" fill="white"/>
+                                    <rect x="75" y="95" width="5" height="5" fill="white"/>
+                                    <rect x="85" y="100" width="5" height="5" fill="white"/>
+                                    <rect x="95" y="95" width="5" height="5" fill="white"/>
+                                    <rect x="105" y="100" width="5" height="5" fill="white"/>
+                                </svg>
+                            </a>
+                            <p class="qr-text">Escanea o haz clic para verificar el documento en el portal del Ministerio de Hacienda</p>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="actions-card">
+                            <h3>ACCIONES</h3>
+                            <button class="action-btn primary" id="btnPdf">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Descargar PDF
+                            </button>
+                            <button class="action-btn secondary" id="btnEmail">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                Enviar por correo
+                            </button>
+                            <a href="pos.html" class="action-btn success">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                Iniciar nueva venta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dte-result.js"></script>
+</body>
+</html>

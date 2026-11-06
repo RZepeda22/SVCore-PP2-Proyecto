@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV-Core - Punto de Venta</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="pos-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">SV</div>
+                <div class="brand-text">
+                    <h2>SV-Core</h2>
+                    <span>Adventure Works</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Operación</div>
+                    <a href="dashboard.html" class="nav-item" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/shopping-cart.png" alt="Punto de venta"></span>
+                        Punto de venta
+                    </a>
+                    <a href="dte.html" class="nav-item" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/logistics.png" alt="Facturación"></span>
+                        Facturación (DTE)
+                    </a>
+                    <a href="inventario.html" class="nav-item">
+                        <span class="icon"><img src="assets/online-shop.png" alt="Inventario"></span>
+                        Inventario
+                        <span class="nav-badge"></span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/user.png" alt="Clientes"></span>
+                        Clientes
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Gestión</div>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/report.png" alt="Reportes"></span>
+                        Reportes
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/setting.png" alt="Configuración"></span>
+                        Configuración
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar"></div>
+                <div class="user-info">
+                    <div class="user-name"></div>
+                    <div class="user-role"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="pos-main">
+            <!-- Header -->
+            <header class="pos-header">
+                <div class="pos-header-info">
+                    <h1>Nueva venta</h1>
+                    <p>Caja 02 · Turno mañana</p>
+                </div>
+                <div class="search-box">
+                    <span class="search-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </span>
+                    <input type="text" id="productSearch" placeholder="Buscar producto por nombre o código..." autocomplete="off">
+                </div>
+            </header>
+
+            <div class="pos-content">
+                <!-- Products Section -->
+                <section class="products-section">
+                    <!-- Category Tabs -->
+                    <div class="category-tabs">
+                        <button class="category-tab active" data-category="all">Todos</button>
+                        <button class="category-tab" data-category="bikes">Bicicletas</button>
+                        <button class="category-tab" data-category="components">Componentes</button>
+                        <button class="category-tab" data-category="clothing">Ropa</button>
+                        <button class="category-tab" data-category="accessories">Accesorios</button>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="productsGrid">
+                        <div class="sv-empty">Cargando productos...</div>
+                    </div>
+                </section>
+
+                <!-- Cart Panel -->
+                <aside class="cart-panel">
+                    <!-- Cart Header -->
+                    <div class="cart-header">
+                        <!-- Estado: Sin cliente asignado -->
+                        <div class="customer-section" id="customerDefault">
+                            <div class="customer-info">
+                                <div class="customer-avatar generic">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="customer-name">Consumidor Final</div>
+                                    <div class="customer-nrc">Sin datos fiscales</div>
+                                </div>
+                            </div>
+                            <button class="btn-assign-customer" id="btnAssignCustomer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                                Asignar cliente
+                            </button>
+                        </div>
+
+                        <!-- Estado: Cliente asignado -->
+                        <div class="customer-section hidden" id="customerAssigned">
+                            <div class="customer-info">
+                                <div class="customer-avatar"></div>
+                                <div>
+                                    <div class="customer-name"></div>
+                                    <div class="customer-nrc"></div>
+                                </div>
+                            </div>
+                            <button class="btn-remove-customer" id="btnRemoveCustomer">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Estado: Búsqueda inline -->
+                        <div class="customer-search hidden" id="customerSearch">
+                            <div class="search-input-wrapper">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                                <input type="text" id="customerSearchInput" placeholder="Buscar por nombre o NRC..." autocomplete="off">
+                                <button class="btn-cancel-search" id="btnCancelSearch">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="customer-dropdown" id="customerDropdown"></div>
+                        </div>
+
+                        <div class="doc-type-tabs">
+                            <button class="doc-type-tab active" data-doc="factura">Factura</button>
+                            <button class="doc-type-tab disabled" data-doc="credito-fiscal" title="Requiere un cliente contribuyente con NRC">Crédito Fiscal</button>
+                            <button class="doc-type-tab disabled" data-doc="ticket" title="El Ticket aún no está definido para la emisión de DTE">Ticket</button>
+                        </div>
+                    </div>
+
+                    <!-- Cart Items -->
+                    <div class="cart-items" id="cartItems">
+                        <div class="empty-cart">
+                            <div class="empty-cart-icon"><img src="assets/shopping-cart.png" alt="Carrito vacío"></div>
+                            <p>Agrega productos para comenzar</p>
+                        </div>
+                    </div>
+
+                    <!-- Cart Summary -->
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Descuento</span>
+                            <span id="discount">-$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>IVA (13%)</span>
+                            <span id="tax">$0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="total">$0.00</span>
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <div class="payment-methods">
+                            <div class="payment-label">Forma de pago</div>
+                            <div class="payment-options">
+                                <button class="payment-option active" data-payment="efectivo">Efectivo</button>
+                                <button class="payment-option" data-payment="tarjeta">Tarjeta</button>
+                                <button class="payment-option" data-payment="transferencia">Transfer.</button>
+                                <button class="payment-option" data-payment="credito">Crédito</button>
+                            </div>
+                        </div>
+
+                        <button class="btn-confirm" id="confirmBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Confirmar venta y emitir DTE
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/pos.js"></script>
+</body>
+</html>

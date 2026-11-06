@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: api_demo
+  config:
+    # Carga las variables del archivo .env (en la raíz del proyecto) si existe
+    import: optional:file:.env[.properties]
+  datasource:
+    # sslMode=REQUIRED: la conexión con MySQL va cifrada (en producción usar VERIFY_IDENTITY con un certificado válido)
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:svcore}?sslMode=${DB_SSL_MODE:REQUIRED}
+    username: ${DB_USERNAME}
+    password: ${DB_PASS}
+  jpa:
+    open-in-view: false
+    show-sql: ${SHOW_SQL:false}
+    hibernate:
+      # validate: Hibernate solo comprueba que las tablas coincidan con las entidades; nunca cambia la base.
+      # Las tablas las crea Flyway desde src/main/resources/db/migration.
+      ddl-auto: validate
+    properties:
+      hibernate:
+        # Los UUID se guardan como CHAR(36), legibles desde MySQL Workbench
+        type:
+          preferred_uuid_jdbc_type: CHAR
+  flyway:
+    locations: classpath:db/migration
+
+svcore:
+  jwt:
+    # HS256: mínimo 32 caracteres
+    secret: ${JWT_SECRET}
+    # RNF-05: la sesión expira a los 15 minutos
+    expiration-minutes: ${JWT_EXP_MINUTES:15}
+  security:
+    max-failed-attempts: 5
+    lock-minutes: 15
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5500,http://127.0.0.1:5500}
+  demo:
+    # Si la tabla de usuarios está vacía, se crean los usuarios de demostración con esta contraseña
+    password: ${DEMO_PASSWORD:}
+  hacienda:
+    # mock = simulación (por defecto); api = API real de recepción de DTE (requiere credenciales del emisor)
+    mode: ${HACIENDA_MODE:mock}
+    # Solo en modo mock: false => los DTE entran en contingencia (también se cambia con PUT /api/config/hacienda-simulator)
+    disponible: ${HACIENDA_DISPONIBLE:true}
+    # Cada cuánto la cola de contingencia reintenta los documentos pendientes
+    retry-delay-ms: ${HACIENDA_RETRY_MS:60000}
+    api:
+      # Ambiente de pruebas de Hacienda; confirmar la URL vigente en el manual de integración
+      url: ${HACIENDA_API_URL:https://apitest.dtes.mh.gob.sv}
+      user: ${HACIENDA_API_USER:}
+      password: ${HACIENDA_API_PASSWORD:}
+      timeout-seconds: 8
+  dte:
+    # Certificado del emisor (PKCS12) para firmar los DTE. Si no se configura, se usa una llave de demostración.
+    keystore:
+      path: ${DTE_KEYSTORE_PATH:}
+      password: ${DTE_KEYSTORE_PASSWORD:}
+      alias: ${DTE_KEY_ALIAS:}
+    demo-key-path: ${DTE_DEMO_KEY_PATH:.svcore/dte-demo-key.json}
+  # Los datos fiscales del emisor están en la tabla emitter_config (CU-09: GET/PUT /api/config/emitter)
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

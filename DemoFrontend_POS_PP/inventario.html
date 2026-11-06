@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV-Core - Inventario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/inventario.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="pos-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">SV</div>
+                <div class="brand-text">
+                    <h2>SV-Core</h2>
+                    <span>Adventure Works</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Operación</div>
+                    <a href="dashboard.html" class="nav-item" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/shopping-cart.png" alt="Punto de venta"></span>
+                        Punto de venta
+                    </a>
+                    <a href="dte.html" class="nav-item" data-roles="VEND,ADMN">
+                        <span class="icon"><img src="assets/logistics.png" alt="Facturación"></span>
+                        Facturación (DTE)
+                    </a>
+                    <a href="inventario.html" class="nav-item active">
+                        <span class="icon"><img src="assets/online-shop.png" alt="Inventario"></span>
+                        Inventario
+                        <span class="nav-badge"></span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/user.png" alt="Clientes"></span>
+                        Clientes
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Gestión</div>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/report.png" alt="Reportes"></span>
+                        Reportes
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="icon"><img src="assets/setting.png" alt="Configuración"></span>
+                        Configuración
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar"></div>
+                <div class="user-info">
+                    <div class="user-name"></div>
+                    <div class="user-role"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="pos-main">
+            <!-- Header -->
+            <header class="inventory-header">
+                <div class="header-left">
+                    <h1>Existencias</h1>
+                    <p id="inventorySubtitle">Bodega central</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <span class="search-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </span>
+                        <input type="text" id="inventorySearch" placeholder="Buscar producto..." autocomplete="off">
+                    </div>
+                    <button class="btn-add-entry sv-hidden" id="addEntryButton">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Registrar entrada
+                    </button>
+                </div>
+            </header>
+
+            <!-- Inventory Content -->
+            <div class="inventory-content">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Productos activos</div>
+                        <div class="stat-value" id="statActive">—</div>
+                        <div class="stat-bar blue"></div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Bajo stock mínimo</div>
+                        <div class="stat-value warning" id="statLow">—</div>
+                        <div class="stat-subtitle warning">Requiere reabastecer</div>
+                        <div class="stat-bar orange"></div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Agotados</div>
+                        <div class="stat-value danger" id="statOut">—</div>
+                        <div class="stat-bar red"></div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Valor del inventario</div>
+                        <div class="stat-value" id="statValue">—</div>
+                        <div class="stat-subtitle">Valorizado a precio de venta</div>
+                        <div class="stat-bar green"></div>
+                    </div>
+                </div>
+
+                <!-- Product Table -->
+                <div class="inventory-table-container">
+                    <div class="table-header">
+                        <div class="table-title">
+                            <h2>Catálogo de existencias</h2>
+                            <span class="table-subtitle">· Ordenado por nivel de stock</span>
+                        </div>
+                        <span class="alert-count" id="alertCount">
+                            <span class="alert-dot"></span>
+                            <span id="alertCountText"></span>
+                        </span>
+                    </div>
+
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>PRODUCTO</th>
+                                <th>CÓDIGO</th>
+                                <th>CATEGORÍA</th>
+                                <th>STOCK</th>
+                                <th>NIVEL</th>
+                                <th>MÍN.</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryRows">
+                            <tr><td colspan="7" class="sv-empty">Cargando existencias...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/inventario.js"></script>
+</body>
+</html>
